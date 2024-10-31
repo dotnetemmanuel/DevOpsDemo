@@ -8,7 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: pwd
-      - run: cd todo.cli; ls
+      - name: List files
+        run: cd todo.cli; ls
   build-project:
     runs-on: ubuntu-latest
     steps:
@@ -16,6 +17,8 @@ jobs:
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 9
+      - name: debug
+        run: pwd; ls -lah;
       - name: Build project
         run: cd todo.cli; dotnet build
       
