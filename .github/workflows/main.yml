@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: pwd
-      - run: ls
       - run: cd todo.cli
+      - run: ls
