@@ -15,12 +15,12 @@ jobs:
   build-project:
     runs-on: ubuntu-latest
     steps:
-    - name: Step that cann fail
+    - name: Step that can fail
+      if: ${{ toNumber(inputs.should_fail) < 7 }}
       run: |
         echo "Failcheck..."
-        if [ "$((${inputs.should_fail}))" -lt 7 ]; then
-          exit 1
-        fi
+        exit 1
+        
 
     - uses: actions/checkout@v4
     - name : Build solution
@@ -28,8 +28,8 @@ jobs:
 
     - name: on-failure
       if: ${{ failure() }}
-      run: echo "Opps, ${{env.important}} was lesser than 7"
+      run: echo "Oops, ${{env.important}} was lesser than 7"
 
     - name: on-success
-      if: always()
+      if: ${{ success() }}
       run: echo "Success! ${{inputs.should_fail}} was 7 or more (${{env.important}})!"
