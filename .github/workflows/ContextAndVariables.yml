@@ -9,7 +9,7 @@ on:
         description: "Fail if < 7"
         required: true
         type: string
-        default: ${{important}}
+        default: ${{env.important}}
 
 jobs: 
   build-project:
@@ -18,7 +18,7 @@ jobs:
     - name: Step that cann fail
       run: |
         echo "Failcheck..."
-        if [ "${{inputs.should_fail}}" < 7 ]; then
+        if [ "${{inputs.should_fail}}" -lt 7 ]; then
           exit 1
         fi
 
@@ -32,4 +32,4 @@ jobs:
 
     - name: on-success
       if: always()
-      run: echo "Success! ${{important}} was 7 or more ${{env.important}}!"
+      run: echo "Success! ${{inputs.should_fail}} was 7 or more (${{env.important}})!"
