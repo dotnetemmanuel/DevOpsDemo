@@ -29,8 +29,8 @@ jobs:
 
     - name: on-failure
       if: ${{ failure() }}
-      run: echo "Oops, ${{env.important}} was lesser than 7"
+      run: echo "Oops, ${{inputs.should_fail}} was lesser than 7"
 
     - name: on-success
       if: ${{ success() }}
-      run: echo "Success! ${{inputs.should_fail}} was 7 or more (${{env.important}})!"
+      run: echo "Success! Input was 7 or more (${{inputs.should_fail}})!"
