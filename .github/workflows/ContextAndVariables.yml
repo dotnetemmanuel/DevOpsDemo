@@ -1,0 +1,35 @@
+name: Context and Variables
+env: 
+  important: 6
+
+on: 
+  workflow_dispatch:
+    inputs:
+      should_fail:
+        description: "Fail if < 7"
+        required: true
+        type: string
+        default: ${{important}}
+
+jobs: 
+  build-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Step that cann fail
+      run: |
+        echo "Failcheck..."
+        if [ "${{inputs.should_fail}}" < 7 ]; then
+          exit 1
+        fi
+
+    - uses: actions/checkout@v4
+    - name : Build solution
+      run: dotnet build
+
+    - name: on-failure
+      if: ${{ failure() }}
+      run: echo "Opps, ${{env.important}} was lesser than 7"
+
+    - name: on-success
+      if: always()
+      run: echo "Success! ${{important}} was 7 or more ${{env.important}}!"
