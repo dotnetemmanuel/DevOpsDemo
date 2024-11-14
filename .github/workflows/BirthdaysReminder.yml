@@ -20,7 +20,7 @@ jobs:
       run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
     
     - name: Check if birthday
-      if: env.TODAY = env.TEST_BIRTHDAY 
+      if: env.TODAY == env.TEST_BIRTHDAY 
       run: |
         echo "env.IS_BIRTHDAY=true" >> $GITHUB_ENV
         echo "PERSON_NAME=Test" >> $GITHUB_ENV
