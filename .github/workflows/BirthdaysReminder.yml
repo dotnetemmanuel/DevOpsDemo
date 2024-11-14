@@ -1,9 +1,9 @@
 name: Birthday Reminder
 
-on: workflow_dispatch
-  #schedule: 
+on: #workflow_dispatch
+  schedule: 
     # - cron: '0 5 * * *'
-    #- cron: '55 13 * * *'
+    - cron: '09 14 * * *'
 
 env:
   TEST_BIRTHDAY: "2024-11-14"
