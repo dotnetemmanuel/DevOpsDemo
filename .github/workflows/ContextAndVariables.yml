@@ -47,4 +47,40 @@ jobs:
         echo "This is the workflow variable: ${{env.workflowVariable}}
         This is the job variable: ${{env.jobVariable}}
         This is the step variable: ${{env.stepVariable}}"
+        
+  build-on-different-os:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        version: [8.0, 7.0, 6.0]
+    steps:
+      - name: Setup .NET
+        uses: actions/checkout@v4
+        with:
+          version: ${{ matrix.version }}
+      - run: dotnet build
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
       
