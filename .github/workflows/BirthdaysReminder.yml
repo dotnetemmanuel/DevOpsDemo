@@ -7,7 +7,7 @@ on:
     - cron: '21 14 * * *'
 
 env:
-  TEST_BIRTHDAY: "2024-11-14"
+  TEST_BIRTHDAY: "2024-11-15"
   IS_BIRTHDAY: "false"
   
 
