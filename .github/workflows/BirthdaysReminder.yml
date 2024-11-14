@@ -1,0 +1,35 @@
+name: Birthday Reminder
+
+on: 
+  schedule: 
+    # - cron: '0 5 * * *'
+    - cron: '55 13 * * *'
+
+env:
+  TEST_BIRTHDAY: "2024-11-14"
+  IS_BIRTHDAY: "false"
+  
+
+jobs:
+  
+  send-reminder:
+    runs-on: ubuntu-latest
+   
+    steps:
+    - name: Set today's date
+      run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+    
+    - name: Check if birthday
+      if: env.TODAY = env.TEST_BIRTHDAY 
+      run: |
+        echo "env.IS_BIRTHDAY=true" >> $GITHUB_ENV
+        echo "PERSON_NAME=Test" >> $GITHUB_ENV
+    
+    - name: Send test birthday reminder     
+      uses: cinotify/github-action@main
+      if: env.IS_BIRTHDAY == 'true'
+      with:
+        to: 'emmanuel.duchene@gmail.com'
+        subject: "GitHub Actions: It's ${{ env.PERSON_NAME }}'s birthday today"
+        body: "<em>Do not forget to congratulate ${{ env.PERSON:NAME}} today!</em>"
+        type: 'text/html'      
