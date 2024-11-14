@@ -1,6 +1,7 @@
 name: Context and Variables
 env: 
   important: 6
+  workflowVariable: "Workflow variable"
 
 on: 
   workflow_dispatch:
@@ -21,8 +22,6 @@ jobs:
         if (( ${{inputs.should_fail}} < 7 )); then
           exit 1
         fi
-        
-
     - uses: actions/checkout@v4
     - name : Build solution
       run: dotnet build
@@ -34,3 +33,18 @@ jobs:
     - name: on-success
       if: ${{ success() }}
       run: echo "Success! Input was 7 or more (${{inputs.should_fail}})!"
+
+  print-variables:
+    env:
+      jobVariable: "Job variable"
+    runs-on: ubuntu-latest
+    steps:
+      
+    - name: Print all variables
+      env:
+        stepVariable: "Step variable"
+      run: |
+        echo "This is the workflow variable: ${{env.workflowVariable}}
+        This is the job variable: ${{env.jobVariable}}
+        This is the step variable: ${{env.stepVariable}}"
+      
