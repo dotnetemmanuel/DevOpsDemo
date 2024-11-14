@@ -22,7 +22,7 @@ jobs:
     - name: Check if birthday
       if: env.TODAY == env.TEST_BIRTHDAY 
       run: |
-        echo "env.IS_BIRTHDAY=true" >> $GITHUB_ENV
+        echo "IS_BIRTHDAY=true" >> $GITHUB_ENV
         echo "PERSON_NAME=Test" >> $GITHUB_ENV
     
     - name: Send test birthday reminder     
