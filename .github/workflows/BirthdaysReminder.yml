@@ -1,9 +1,10 @@
 name: Birthday Reminder
 
-on: #workflow_dispatch
+on: 
+  workflow_dispatch:
   schedule: 
     # - cron: '0 5 * * *'
-    - cron: '19 14 * * *'
+    - cron: '21 14 * * *'
 
 env:
   TEST_BIRTHDAY: "2024-11-14"
@@ -24,7 +25,13 @@ jobs:
       run: |
         echo "IS_BIRTHDAY=true" >> $GITHUB_ENV
         echo "PERSON_NAME=Test" >> $GITHUB_ENV
-    
+
+    - name: Debug information
+      run: |
+        echo "Current date: ${{ env.TODAY }}"
+        echo "Test birthday: ${{ env.TEST_BIRTHDAY }}"
+        echo "Is Birthday?: ${{ env.IS_BIRTHDAY }}"
+  
     - name: Send test birthday reminder     
       uses: cinotify/github-action@main
       if: env.IS_BIRTHDAY == 'true'
