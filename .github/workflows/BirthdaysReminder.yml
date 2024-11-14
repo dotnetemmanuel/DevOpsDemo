@@ -31,5 +31,5 @@ jobs:
       with:
         to: 'emmanuel.duchene@gmail.com'
         subject: "GitHub Actions: It's ${{ env.PERSON_NAME }}'s birthday today"
-        body: "<em>Do not forget to congratulate ${{ env.PERSON:NAME}} today!</em>"
+        body: "<em>Do not forget to congratulate ${{ env.PERSON_NAME}} today!</em>"
         type: 'text/html'      
