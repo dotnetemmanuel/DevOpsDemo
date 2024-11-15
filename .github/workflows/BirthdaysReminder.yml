@@ -11,29 +11,41 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        date: ["2024-11-15", "2024-06-19", "2024-04-16"]
-        name: ["Katarina", "Saga", "Léon"]
-            
+        index: [0, 1, 2]  # Indices for the arrays
+    env:
+      DATES: "2024-11-15 2024-06-19 2024-04-16"  # Space-separated dates
+      NAMES: "Katarina Saga Léon"  # Space-separated names
+
     steps:
-    - name: Set today's date
-      run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-    
-    - name: Check if birthday
-      run: |
-          if [ "${{ env.TODAY }}" == "${{ matrix.date }}" ]; then
+      - name: Set today's date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Extract date and name
+        run: |
+          # Convert space-separated strings to arrays
+          IFS=' ' read -r -a dates <<< "${{ env.DATES }}"
+          IFS=' ' read -r -a names <<< "${{ env.NAMES }}"
+          
+          # Get the date and name for the current index
+          date=${dates[${{ matrix.index }}]}
+          name=${names[${{ matrix.index }}]}
+          
+          echo "DATE=$date" >> $GITHUB_ENV
+          echo "NAME=$name" >> $GITHUB_ENV
+
+      - name: Check if birthday
+        run: |
+          if [ "${{ env.TODAY }}" == "${{ env.DATE }}" ]; then
             echo "IS_BIRTHDAY=true" >> $GITHUB_ENV
-            echo "PERSON_NAME=${{ matrix.name }}" >> $GITHUB_ENV
           else
             echo "IS_BIRTHDAY=false" >> $GITHUB_ENV
           fi
-      env:
-        IS_BIRTHDAY: "false"
-   
-    - name: Send test birthday reminder     
-      uses: cinotify/github-action@main
-      if: env.IS_BIRTHDAY == 'true'
-      with:
-        to: 'emmanuel.duchene@gmail.com'
-        subject: "GitHub Actions: It's ${{ env.PERSON_NAME }}'s birthday today"
-        body: "<em>Do not forget to congratulate ${{ env.PERSON_NAME}} today!</em>"
-        type: 'text/html'      
+
+      - name: Send birthday reminder
+        if: env.IS_BIRTHDAY == 'true'
+        uses: cinotify/github-action@main
+        with:
+          to: 'emmanuel.duchene@gmail.com'
+          subject: "GitHub Actions: It's ${{ env.NAME }}'s birthday today"
+          body: "<em>Do not forget to congratulate ${{ env.NAME }} today!</em>"
+          type: 'text/html'
