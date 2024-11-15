@@ -49,12 +49,3 @@ jobs:
           subject: "GitHub Actions: It's ${{ env.NAME }}'s birthday today"
           body: "<em>Do not forget to congratulate ${{ env.NAME }} today!</em>"
           type: 'text/html'
-
-      - name: Test email
-        uses: cinotify/github-action@main
-        with:
-          to: 'emmanuel.duchene@gmail.com'
-          subject: "Test Email"
-          body: "<em>This is a test email from GitHub Actions.</em>"
-          type: 'text/html'
-
