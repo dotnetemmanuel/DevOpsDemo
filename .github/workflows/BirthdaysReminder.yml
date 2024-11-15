@@ -3,8 +3,8 @@ name: Birthday Reminder
 on: 
   workflow_dispatch:
   schedule: 
-    # - cron: '0 5 * * *'
-    - cron: '50 9 * * *'
+    - cron: '0 5 * * *'
+    # - cron: '50 9 * * *'
 
 jobs:  
   send-reminder:
