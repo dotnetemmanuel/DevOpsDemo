@@ -13,12 +13,12 @@ jobs:
       matrix:
         index: [0, 1, 2]  # Indices for the arrays
     env:
-      DATES: "2025-08-08 2025-06-19 2025-04-16 2024-12-01"  # Space-separated dates
+      DATES: "11-15 06-19 04-16 12-01"  # Space-separated dates
       NAMES: "Katarina Saga Léon Maja"  # Space-separated names
 
     steps:
       - name: Set today's date
-        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "TODAY=$(date +'%m-%d')" >> $GITHUB_ENV
         
       - name: Extract date and name
         run: |
