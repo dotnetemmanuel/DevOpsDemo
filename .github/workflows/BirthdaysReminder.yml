@@ -13,8 +13,8 @@ jobs:
       matrix:
         index: [0, 1, 2]  # Indices for the arrays
     env:
-      DATES: "2024-11-15 2024-06-19 2024-04-16"  # Space-separated dates
-      NAMES: "Katarina Saga Léon"  # Space-separated names
+      DATES: "2025-08-08 2025-06-19 2025-04-16 2024-12-01"  # Space-separated dates
+      NAMES: "Katarina Saga Léon Maja"  # Space-separated names
 
     steps:
       - name: Set today's date
