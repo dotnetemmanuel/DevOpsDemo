@@ -7,24 +7,30 @@ on:
     - cron: '50 9 * * *'
 
 env:
-  TEST_BIRTHDAY: "2024-11-15"
+  TEST_BIRTHDAY: "2024-11-15"  
   IS_BIRTHDAY: "false"
   
 
-jobs:
-  
+jobs:  
   send-reminder:
     runs-on: ubuntu-latest
-   
+    strategy:
+      matrix:
+        date: ["2024-11-15", "2024-06-19", "2024-04-16"]
+        name: ["Katarina", "Saga", "Léon"]
+            
     steps:
     - name: Set today's date
       run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
     
     - name: Check if birthday
-      if: env.TODAY == env.TEST_BIRTHDAY 
       run: |
-        echo "IS_BIRTHDAY=true" >> $GITHUB_ENV
-        echo "PERSON_NAME=Test" >> $GITHUB_ENV
+          if [ "${{ env.TODAY }}" == "${{ matrix.date }}" ]; then
+            echo "IS_BIRTHDAY=true" >> $GITHUB_ENV
+            echo "PERSON_NAME=${{ matrix.name }}" >> $GITHUB_ENV
+          else
+            echo "IS_BIRTHDAY=false" >> $GITHUB_ENV
+          fi
 
     - name: Debug information
       run: |
