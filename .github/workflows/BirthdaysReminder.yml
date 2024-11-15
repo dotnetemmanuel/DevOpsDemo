@@ -13,7 +13,7 @@ jobs:
       matrix:
         index: [0, 1, 2]  # Indices for the arrays
     env:
-      DATES: "11-15 06-19 04-16 12-01"  # Space-separated dates
+      DATES: "08-08 06-19 04-16 12-01"  # Space-separated dates
       NAMES: "Katarina Saga Léon Maja"  # Space-separated names
 
     steps:
