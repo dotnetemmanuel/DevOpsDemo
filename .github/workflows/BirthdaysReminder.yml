@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Set today's date
         run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
+        
       - name: Extract date and name
         run: |
           # Convert space-separated strings to arrays
