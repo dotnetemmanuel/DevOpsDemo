@@ -6,11 +6,6 @@ on:
     # - cron: '0 5 * * *'
     - cron: '50 9 * * *'
 
-env:
-  TEST_BIRTHDAY: "2024-11-15"  
-  IS_BIRTHDAY: "false"
-  
-
 jobs:  
   send-reminder:
     runs-on: ubuntu-latest
@@ -31,13 +26,9 @@ jobs:
           else
             echo "IS_BIRTHDAY=false" >> $GITHUB_ENV
           fi
-
-    - name: Debug information
-      run: |
-        echo "Current date: ${{ env.TODAY }}"
-        echo "Test birthday: ${{ env.TEST_BIRTHDAY }}"
-        echo "Is Birthday?: ${{ env.IS_BIRTHDAY }}"
-  
+      env:
+        IS_BIRTHDAY: "false"
+   
     - name: Send test birthday reminder     
       uses: cinotify/github-action@main
       if: env.IS_BIRTHDAY == 'true'
