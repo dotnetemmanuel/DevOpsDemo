@@ -1,0 +1,17 @@
+name: Print environment varianles form different environments
+
+on: workflow_dispatch
+
+jobs:
+  print-variables : 
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.environment }}
+    strategy:
+      matrix:
+        environment: [Development, Production]
+    steps:
+      - name: Print variables
+        run: |
+          echo ${{ vars.API_URL }}
+          echo ${{ vars.MY_VARIABLE }}
+      
