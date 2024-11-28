@@ -1,0 +1,14 @@
+name: Create file
+
+on: workflow_dispatch
+
+jobs:
+  create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create file
+        run: |
+          echo "My new file" > my-new-file.md
+          echo "File created!
+      
