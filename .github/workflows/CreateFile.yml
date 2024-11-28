@@ -1,3 +1,6 @@
+permissions:
+  contents: write
+
 name: Create file
 
 on: workflow_dispatch
@@ -21,7 +24,5 @@ jobs:
           git add ${{env.fileName}}
           git commit -m "Added an automatically created file"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       
