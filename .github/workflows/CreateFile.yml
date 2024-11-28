@@ -10,5 +10,5 @@ jobs:
       - name: Create file
         run: |
           echo "My new file" > my-new-file.md
-          echo "File created!
+          echo "File created!"
       
