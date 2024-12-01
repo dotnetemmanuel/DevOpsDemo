@@ -45,7 +45,7 @@ jobs:
         if: env.IS_BIRTHDAY == 'true'
         uses: cinotify/github-action@main
         with:
-          to: 'emmanuel.duchene@gmail.com'
+          to: 'duchene.vucicevic@gmail.com'
           subject: "GitHub Actions: It's ${{ env.NAME }}'s birthday today"
           body: "<em>Do not forget to congratulate ${{ env.NAME }} today!</em>"
           type: 'text/html'
