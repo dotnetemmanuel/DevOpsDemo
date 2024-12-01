@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        index: [0, 1, 2]  # Indices for the arrays
+        index: [0, 1, 2, 3]  # Indices for the arrays
     env:
       DATES: "08-08 06-19 04-16 12-01"  # Space-separated dates
       NAMES: "Katarina Saga Léon Maja"  # Space-separated names
